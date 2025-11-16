@@ -1,0 +1,42 @@
+@startuml
+title Diagrama de Sequência – UC-07: Registrar Devolução
+
+skinparam participantBorderColor #2C3E50
+skinparam participantBackgroundColor #ECF0F1
+skinparam sequenceArrowColor #333333
+skinparam sequenceMessageAlign center
+
+actor Bibliotecario
+participant "Interface do Sistema" as UI
+participant "API Backend" as API
+participant "Controlador de Empréstimos" as Ctrl
+participant "Registro de Empréstimo" as Emp
+participant "Registro de Livro" as Livro
+participant "Registro de Multa" as Multa
+
+Bibliotecario -> UI : Registrar Devolução\n(idEmprestimo)
+UI -> API : requisição HTTP\n/devolucoes (POST)
+API -> Ctrl : processarDevolucao(idEmprestimo)
+
+Ctrl -> Emp : buscarEmprestimo(id)
+Emp --> Ctrl : dadosEmprestimo
+
+Ctrl -> Livro : atualizarStatus(DISPONIVEL)
+Livro --> Ctrl : OK
+
+Ctrl -> Multa : calcularMulta(idEmprestimo)
+Multa --> Ctrl : valorMulta
+
+alt Multa gerada
+    Ctrl -> Multa : registrarMulta()
+    Multa --> Ctrl : confirmação
+end
+
+Ctrl -> Emp : registrarDevolucao()
+Emp --> Ctrl : confirmação
+
+Ctrl --> API : devolução registrada
+API --> UI : resposta OK
+UI --> Bibliotecario : Devolução concluída
+
+@enduml

@@ -1,0 +1,61 @@
+@startuml
+skinparam rectangle {
+  BackgroundColor #F8F8F8
+  BorderColor #000000
+  RoundCorner 15
+}
+
+skinparam shadowing false
+skinparam defaultTextAlignment center
+skinparam ArrowColor #3A3A3A
+skinparam ArrowThickness 1.2
+
+' ============================
+' Atores (Topo Azul)
+' ============================
+rectangle "<b>Administrador</b>\nUsuário com acesso total" as Admin #1F4E79 {
+}
+
+rectangle "<b>Bibliotecário</b>\nUsuário responsável por acervo e empréstimos" as Biblio #1F4E79 {
+}
+
+rectangle "<b>Leitor</b>\nUsuário focado em leitura e reservas" as Leitor #1F4E79 {
+}
+
+' ============================
+' Sistema BookTrack
+' ============================
+rectangle "Sistema BookTrack" as SistemaBookTrack <<System>> #FFFFFF {
+    
+    rectangle "<b>Aplicação Web</b>\nReact (JavaScript)\nInterface principal" as Web #1F77D0
+
+    rectangle "<b>Aplicativo Mobile</b>\nReact Native\nVersão para leitores" as Mobile #1F77D0
+
+    rectangle "<b>API Backend</b>\nNode.js (Express)\nLógica de Negócio (JSON/HTTPS)" as API #1F77D0
+
+    rectangle "<b>Banco de Dados</b>\nPostgreSQL\nArmazenamento principal" as DB #1F77D0
+}
+
+' ============================
+' Sistema Externo
+' ============================
+rectangle "<b>Sistema de Pagamentos Externo</b>\nValidação e confirmação de pagamentos" as PagamentoExt #B3B3B3
+
+' ============================
+' Conexões
+' ============================
+
+Admin --> Web : Usa\n[HTTPS]
+Biblio --> Web : Usa\n[HTTPS]
+Leitor --> Web : Usa\n[HTTPS]
+Leitor --> Mobile : Usa\n[HTTPS]
+
+Web --> API : Consome\n[JSON/HTTPS]
+Mobile --> API : Consome\n[JSON/HTTPS]
+
+API --> DB : Lê/Escreve\n[SQL]
+
+API --> PagamentoExt : Envia multas\n[JSON/HTTPS]
+PagamentoExt --> API : Retorna confirmações\n[JSON/HTTPS]
+
+@enduml

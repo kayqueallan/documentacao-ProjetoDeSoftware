@@ -1,0 +1,39 @@
+@startuml
+title Diagrama de Sequência – UC-06: Realizar Empréstimo
+
+skinparam participantBorderColor #2C3E50
+skinparam participantBackgroundColor #ECF0F1
+skinparam sequenceArrowColor #333333
+skinparam sequenceMessageAlign center
+
+actor Leitor
+participant "Interface do Sistema" as UI
+participant "API Backend" as API
+participant "Controlador de Empréstimos" as Ctrl
+participant "Registro de Livro" as Livro
+participant "Registro de Empréstimo" as Emp
+
+Leitor -> UI : Solicitar Empréstimo\n(idLivro)
+UI -> API : requisição HTTP\n/emprestimos (POST)
+API -> Ctrl : processarEmpréstimo(idLivro, idUsuario)
+
+Ctrl -> Livro : verificarDisponibilidade(idLivro)
+Livro --> Ctrl : statusLivro
+
+alt Livro disponível
+    Ctrl -> Emp : criarEmpréstimo(idUsuario, idLivro)
+    Emp --> Ctrl : confirmação
+
+    Ctrl -> Livro : atualizarStatus(EMPRESTADO)
+    Livro --> Ctrl : OK
+
+    Ctrl --> API : empréstimo realizado
+    API --> UI : resposta OK
+    UI --> Leitor : Empréstimo confirmado
+else Livro indisponível
+    Ctrl --> API : erro\nLivro indisponível
+    API --> UI : resposta de erro
+    UI --> Leitor : Notificar indisponibilidade
+end
+
+@enduml

@@ -1,0 +1,39 @@
+@startuml
+title Diagrama de Sequência – UC-05: Realizar Reserva
+
+skinparam participantBorderColor #2C3E50
+skinparam participantBackgroundColor #ECF0F1
+skinparam sequenceArrowColor #333333
+skinparam sequenceMessageAlign center
+
+actor Leitor
+participant "Interface do Sistema" as UI
+participant "API Backend" as API
+participant "Controlador de Reservas" as Ctrl
+participant "Registro de Livro" as Livro
+participant "Registro de Reserva" as Reserva
+
+Leitor -> UI : Solicitar Reserva\n(idLivro)
+UI -> API : requisição HTTP\n/reservas (POST)
+API -> Ctrl : processarReserva(idLivro, idUsuario)
+
+Ctrl -> Livro : verificarDisponibilidade(idLivro)
+Livro --> Ctrl : statusLivro
+
+alt Livro indisponível
+    Ctrl -> Reserva : criarReserva(idUsuario, idLivro)
+    Reserva --> Ctrl : confirmação
+
+    Ctrl -> Livro : atualizarStatus(RESERVADO)
+    Livro --> Ctrl : OK
+
+    Ctrl --> API : reserva confirmada
+    API --> UI : resposta OK
+    UI --> Leitor : Reserva realizada
+else Livro disponível
+    Ctrl --> API : erro\nLivro já disponível
+    API --> UI : resposta de erro
+    UI --> Leitor : Informar disponibilidade
+end
+
+@enduml

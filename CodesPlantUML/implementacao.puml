@@ -1,0 +1,55 @@
+@startuml
+title Diagrama de Implementação - BookTrack (Versão Completa)
+
+skinparam node {
+  BackgroundColor #ECF0F1
+  BorderColor #2C3E50
+  FontColor black
+}
+skinparam artifact {
+  BackgroundColor #FFFFFF
+  BorderColor #2C3E50
+}
+skinparam actorStyle awesome
+
+' ==============================================================
+' Usuário e Dispositivo
+' ==============================================================
+actor "Usuário" as Usuario
+
+node "Dispositivo do Usuário\n(Web/Mobile)\n- Navegador (Chrome/Firefox)\n- SO: Windows / Android / iOS" as UserDevice {
+    artifact "Frontend Web/Mobile\nReact 18\nExecutado no navegador" as Frontend
+}
+
+Usuario --> UserDevice : Interação\n(Interface UI)
+
+
+' ==============================================================
+' Nuvem / Infraestrutura
+' ==============================================================
+node "Ambiente em Nuvem\n(Internet / Rede Externa)" as Cloud {
+
+    ' ---------------- Backend ----------------
+    node "Servidor Backend\nLinux Ubuntu 22.04\nNode.js 20\nPorta 3000" as BackendServer {
+        artifact "API REST\nBackend (Express)\nControladores, Serviços" as BackendAPI
+    }
+
+    ' ---------------- Banco de Dados ----------------
+    node "Servidor de Banco de Dados\nPostgreSQL 15\nPorta 5432\nLinux Ubuntu Server" as DBServer {
+        artifact "Database\nSchema: booktrack_db\nTabelas: usuarios, livros,\nemprestimos, reservas, multas" as Database
+    }
+
+    ' ---------------- Sistema Externo ----------------
+    node "Serviço Externo de Pagamentos\nGateway REST\nHTTPS 443" as PaymentSystem {
+        artifact "API de Pagamento\n(Pagamento de Multas)" as PaymentAPI
+    }
+}
+
+' ==============================================================
+' Conexões
+' ==============================================================
+Frontend --> BackendAPI : HTTPS 443\nJSON Request/Response
+BackendAPI --> Database : SQL (Porta 5432)
+BackendAPI --> PaymentAPI : HTTPS 443\nJSON (Pagar Multa)
+
+@enduml

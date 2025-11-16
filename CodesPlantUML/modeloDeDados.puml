@@ -1,0 +1,63 @@
+@startuml
+!define table(x) class x << (T,#FFAAAA) >>
+hide methods
+
+title Modelo de Dados – BookTrack (DER/ERD)
+
+' ===========================
+' Tabelas
+' ===========================
+
+table(Usuario) {
+  + id_usuario : int <<PK>>
+  nome : varchar
+  email : varchar
+  senha : varchar
+  tipo : varchar   <<Leitor/Bibliotecário/Admin>>
+}
+
+table(Livro) {
+  + id_livro : int <<PK>>
+  titulo : varchar
+  autor : varchar
+  categoria : varchar
+  ano : int
+  status : varchar <<Disponível/Reservado/Emprestado>>
+}
+
+table(Emprestimo) {
+  + id_emprestimo : int <<PK>>
+  id_usuario : int <<FK>>
+  id_livro : int <<FK>>
+  data_emprestimo : date
+  data_prevista : date
+  data_devolucao : date
+}
+
+table(Reserva) {
+  + id_reserva : int <<PK>>
+  id_usuario : int <<FK>>
+  id_livro : int <<FK>>
+  data_reserva : date
+}
+
+table(Multa) {
+  + id_multa : int <<PK>>
+  id_emprestimo : int <<FK>>
+  valor : decimal
+  status_pagamento : varchar <<PENDENTE/PAGO>>
+}
+
+' ===========================
+' RELACIONAMENTOS
+' ===========================
+
+Usuario "1" -- "0..*" Emprestimo : realiza >
+Livro "1" -- "0..*" Emprestimo : < é emprestado
+
+Usuario "1" -- "0..*" Reserva : realiza >
+Livro "1" -- "0..*" Reserva : < é reservado
+
+Emprestimo "1" -- "0..1" Multa : < gera
+
+@enduml

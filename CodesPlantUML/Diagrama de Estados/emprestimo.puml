@@ -1,0 +1,24 @@
+@startuml
+title Diagrama de Estados - Empréstimo (BookTrack)
+
+skinparam state {
+  BackgroundColor #ECF0F1
+  BorderColor #2C3E50
+  FontColor black
+}
+
+[*] --> Criado : Empréstimo registrado
+
+Criado --> Ativo : Livro entregue ao leitor
+
+Ativo --> Atrasado : Prazo excedido
+Ativo --> Finalizado : Devolução dentro do prazo
+
+Atrasado --> EmProcessoMulta : Multa calculada
+Atrasado --> Finalizado : Devolução com multa pendente
+
+EmProcessoMulta --> Finalizado : Multa paga
+
+Finalizado --> [*]
+
+@enduml

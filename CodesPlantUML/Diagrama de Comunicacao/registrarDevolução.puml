@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+title Diagrama de Comunicação – UC-07: Registrar Devolução
+
+skinparam linetype polyline
+
+actor Bibliotecario
+rectangle "Interface do Sistema" as UI
+rectangle "API Backend" as API
+rectangle "Controlador de Empréstimos" as CtrlEmp
+rectangle "Registro de Empréstimo" as RegEmp
+rectangle "Registro de Livro" as Livro
+rectangle "Registro de Multa" as RegMulta
+
+Bibliotecario --> UI : 1. Registrar Devolução
+UI --> API : 2. enviarDevolucao()
+API --> CtrlEmp : 3. processarDevolucao()
+
+CtrlEmp --> RegEmp : 4. buscarEmprestimo()
+RegEmp --> CtrlEmp : 5. dadosEmprestimo
+
+CtrlEmp --> Livro : 6. atualizarStatus(DISPONIVEL)
+Livro --> CtrlEmp : 7. OK
+
+CtrlEmp --> RegMulta : 8. calcularMulta()
+RegMulta --> CtrlEmp : 9. valorMulta
+
+CtrlEmp --> RegEmp : 10. finalizarDevolucao()
+RegEmp --> CtrlEmp : 11. OK
+
+CtrlEmp --> API : 12. retornoSucesso
+API --> UI : 13. resposta OK
+UI --> Bibliotecario : 14. Devolução Confirmada
+
+@enduml

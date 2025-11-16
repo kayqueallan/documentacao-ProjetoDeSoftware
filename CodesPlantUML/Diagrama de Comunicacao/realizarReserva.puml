@@ -1,0 +1,32 @@
+@startuml
+left to right direction
+title Diagrama de Comunicação – UC-05: Realizar Reserva
+
+skinparam linetype polyline
+skinparam ArrowColor #333333
+
+actor Leitor
+rectangle "Interface do Sistema" as UI
+rectangle "API Backend" as API
+rectangle "Controlador de Reservas" as CtrlRes
+rectangle "Registro de Livro" as Livro
+rectangle "Registro de Reserva" as RegReserva
+
+Leitor --> UI : 1. Solicitar Reserva
+UI --> API : 2. Requisição Reserva
+API --> CtrlRes : 3. processarReserva()
+
+CtrlRes --> Livro : 4. verificarDisponibilidade()
+Livro --> CtrlRes : 5. statusLivro
+
+CtrlRes --> RegReserva : 6. criarReserva()
+RegReserva --> CtrlRes : 7. confirmação
+
+CtrlRes --> Livro : 8. atualizarStatus(RESERVADO)
+Livro --> CtrlRes : 9. OK
+
+CtrlRes --> API : 10. retornoSucesso
+API --> UI : 11. resposta OK
+UI --> Leitor : 12. Reserva Confirmada
+
+@enduml

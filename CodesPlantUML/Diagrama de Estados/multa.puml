@@ -1,0 +1,22 @@
+@startuml
+title Diagrama de Estados - Multa (BookTrack)
+
+skinparam state {
+  BackgroundColor #ECF0F1
+  BorderColor #2C3E50
+  FontColor black
+}
+
+[*] --> Calculada : Empréstimo atrasado
+
+Calculada --> Emitida : Multa gerada no sistema
+
+Emitida --> AguardandoPagamento : Notificação enviada ao leitor
+
+AguardandoPagamento --> Paga : Pagamento aprovado
+AguardandoPagamento --> Cancelada : Multa removida\n(manutenção/erro)
+
+Paga --> [*]
+Cancelada --> [*]
+
+@enduml

@@ -1,0 +1,52 @@
+@startuml
+left to right direction
+skinparam actorStyle awesome
+
+actor "Usuário Comum\n(Leitor)" as Usuario
+actor "Bibliotecário" as Bibliotecario
+actor "Administrador" as Admin
+actor "Sistema de Pagamentos\nExterno" as Pagamentos
+
+rectangle "BookTrack" {
+
+    (UC-01 Cadastrar Usuário) as UC01
+    (UC-02 Login) as UC02
+    (UC-03 Pesquisar Livros) as UC03
+    (UC-04 Visualizar Detalhes do Livro) as UC04
+    (UC-05 Realizar Reserva) as UC05
+
+    (UC-06 Realizar Empréstimo) as UC06
+    (UC-07 Registrar Devolução) as UC07
+    (UC-08 Cadastrar Livro) as UC08
+    (UC-09 Gerar Relatório de Empréstimos) as UC09
+
+    (UC-10 Pagar Multa) as UC10
+
+    (UC-11 Gerenciar Permissões) as UC11
+    (UC-12 Gerenciar Bibliotecários) as UC12
+    (UC-13 Configurar Sistema) as UC13
+}
+
+' --- Usuário Comum (Leitor) ---
+Usuario --> UC01
+Usuario --> UC02
+Usuario --> UC03
+Usuario --> UC04
+Usuario --> UC05
+Usuario --> UC10
+
+' --- Bibliotecário ---
+Bibliotecario --> UC06
+Bibliotecario --> UC07
+Bibliotecario --> UC08
+Bibliotecario --> UC09
+
+' --- Administrador ---
+Admin --> UC11
+Admin --> UC12
+Admin --> UC13
+
+' --- Integração com sistema externo ---
+UC10 --> Pagamentos
+
+@enduml

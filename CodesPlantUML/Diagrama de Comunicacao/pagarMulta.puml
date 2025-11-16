@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+title Diagrama de Comunicação – UC-10: Pagar Multa
+
+skinparam linetype polyline
+
+actor Leitor
+rectangle "Interface do Sistema" as UI
+rectangle "API Backend" as API
+rectangle "Controlador de Multas" as CtrlMulta
+rectangle "Registro de Multa" as RegMulta
+rectangle "Sistema Externo\nPagamentos" as PagExt
+
+Leitor --> UI : 1. Solicitar Pagamento
+UI --> API : 2. enviarPagamento()
+API --> CtrlMulta : 3. processarPagamento()
+
+CtrlMulta --> RegMulta : 4. consultarMulta()
+RegMulta --> CtrlMulta : 5. dadosMulta
+
+CtrlMulta --> PagExt : 6. enviarPagamento()
+PagExt --> CtrlMulta : 7. statusPagamento
+
+CtrlMulta --> RegMulta : 8. atualizarStatus(PAGO)
+RegMulta --> CtrlMulta : 9. OK
+
+CtrlMulta --> API : 10. retornoSucesso
+API --> UI : 11. resposta OK
+UI --> Leitor : 12. Pagamento Confirmado
+
+@enduml

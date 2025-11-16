@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+title Diagrama de Comunicação – UC-06: Realizar Empréstimo
+
+skinparam linetype polyline
+
+actor Leitor
+rectangle "Bibliotecário" as Biblio
+rectangle "API Backend" as API
+rectangle "Controlador de Empréstimos" as CtrlEmp
+rectangle "Registro de Livro" as Livro
+rectangle "Registro de Empréstimo" as RegEmp
+
+Leitor --> Biblio : 1. Solicitar Empréstimo
+Biblio --> API : 2. Enviar Solicitação
+API --> CtrlEmp : 3. processarEmpréstimo()
+
+CtrlEmp --> Livro : 4. verificarDisponibilidade()
+Livro --> CtrlEmp : 5. statusLivro
+
+CtrlEmp --> RegEmp : 6. criarEmpréstimo()
+RegEmp --> CtrlEmp : 7. confirmação
+
+CtrlEmp --> Livro : 8. atualizarStatus(EMPRESTADO)
+Livro --> CtrlEmp : 9. OK
+
+CtrlEmp --> API : 10. retornoSucesso
+API --> Biblio : 11. Confirmação
+Biblio --> Leitor : 12. Empréstimo Confirmado
+
+@enduml

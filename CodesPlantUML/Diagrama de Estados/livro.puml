@@ -1,0 +1,29 @@
+@startuml
+title Diagrama de Estados - Ciclo de Vida do Livro (BookTrack)
+
+skinparam state {
+  BackgroundColor #ECF0F1
+  BorderColor #2C3E50
+  FontColor black
+}
+
+[*] --> Disponível : Cadastro do livro
+
+Disponível --> Emprestado : Empréstimo realizado
+Disponível --> Reservado : Reserva criada
+
+Reservado --> Emprestado : Empréstimo após reserva
+Reservado --> Disponível : Reserva cancelada\nou expirada
+
+Emprestado --> Atrasado : Prazo excedido
+Emprestado --> Disponível : Devolução dentro do prazo
+
+Atrasado --> Disponível : Devolução com multa
+Atrasado --> EmProcessoMulta : Multa emitida
+
+EmProcessoMulta --> Disponível : Multa paga
+
+Disponível --> Indisponível : Remoção temporária\n(manutenação/dano)
+Indisponível --> Disponível : Retorno ao acervo
+
+@enduml

@@ -1,0 +1,39 @@
+@startuml
+title Diagrama de Sequência – UC-10: Pagar Multa
+
+skinparam participantBorderColor #2C3E50
+skinparam participantBackgroundColor #ECF0F1
+skinparam sequenceArrowColor #333333
+skinparam sequenceMessageAlign center
+
+actor Leitor
+participant "Interface do Sistema" as UI
+participant "API Backend" as API
+participant "Controlador de Multas" as Ctrl
+participant "Registro de Multa" as Multa
+participant "Sistema de Pagamentos Externo" as Pagamento
+
+Leitor -> UI : Solicitar Pagamento\n(idMulta)
+UI -> API : requisição HTTP\n/pagarMulta (POST)
+API -> Ctrl : processarPagamento(idMulta)
+
+Ctrl -> Multa : consultarMulta(idMulta)
+Multa --> Ctrl : dadosMulta
+
+Ctrl -> Pagamento : enviarPagamento(valor)
+Pagamento --> Ctrl : retornoPagamento
+
+alt Pagamento aprovado
+    Ctrl -> Multa : atualizarStatus(PAGO)
+    Multa --> Ctrl : OK
+
+    Ctrl --> API : pagamento confirmado
+    API --> UI : resposta OK
+    UI --> Leitor : Pagamento aprovado
+else Falha no pagamento
+    Ctrl --> API : erro\nPagamento recusado
+    API --> UI : resposta de erro
+    UI --> Leitor : Pagamento não realizado
+end
+
+@enduml
