@@ -1,0 +1,60 @@
+@startuml
+title Diagrama de Componentes - Sistema "BookTrack"
+
+skinparam rectangleStyle rounded
+skinparam shadowing false
+skinparam arrowThickness 1.2
+skinparam componentStyle rectangle
+
+' --- Frontend ---
+rectangle "Frontend (Web/Mobile)" as FE {
+  component "Aplicação Web\n(React)" as Web
+  component "App Mobile\n(React Native)" as Mobile
+}
+
+' --- API Gateway ---
+component "API Gateway\n(REST/HTTP)" as Gateway
+
+' --- Serviços (Backend Node.js) ---
+package "Serviços (Node.js + Express)" {
+
+  component "Svc. Usuários" as SvcUsuarios
+  component "Svc. Livros"   as SvcLivros
+  component "Svc. Empréstimos\n e Reservas" as SvcEmprestimos
+  component "Svc. Multas"   as SvcMultas
+}
+
+' --- Integração Externa ---
+component "API Externa\nSistema de Pagamentos" as PagExt
+
+' --- Banco de Dados ---
+database "Banco de Dados\n(PostgreSQL)" as DB {
+  frame "Tabelas" {
+    component "usuarios" as TUsuarios
+    component "livros" as TLivros
+    component "emprestimos" as TEmp
+    component "reservas" as TRes
+    component "multas" as TMult
+  }
+}
+
+' Conexões Frontend → Gateway
+Web --> Gateway : REST/HTTP
+Mobile --> Gateway : REST/HTTP
+
+' Gateway → Serviços
+Gateway --> SvcUsuarios
+Gateway --> SvcLivros
+Gateway --> SvcEmprestimos
+Gateway --> SvcMultas
+
+' Serviços → Banco de Dados
+SvcUsuarios --> DB : Lê/Escreve
+SvcLivros --> DB : Lê/Escreve
+SvcEmprestimos --> DB : Lê/Escreve
+SvcMultas --> DB : Lê/Escreve
+
+' Integração externa
+SvcMultas --> PagExt : "Processa pagamento"
+
+@enduml
