@@ -7,20 +7,27 @@ Este repositório concentra toda a documentação técnica de arquitetura, desig
 ---
 
 # 📖 Sobre o Sistema
-O BookTrack é um sistema projetado para gerenciar bibliotecas físicas e digitais.  
-Ele permite que usuários realizem:
 
-- Empréstimos e reservas de livros  
-- Leitura e avaliação de ebooks  
-- Acompanhamento do histórico de leitura  
+O **BookTrack** é um sistema para gerenciar bibliotecas físicas e digitais, oferecendo organização e praticidade para leitores e bibliotecários.  
 
-Para bibliotecários, o sistema oferece:
+Para **usuários**, o sistema permite:  
+- **Empréstimos e reservas de livros** – localizar, reservar e acompanhar prazos de devolução.  
+- **Leitura e avaliação de ebooks** – ler online e registrar comentários sobre os livros.  
+- **Histórico de leitura** – consultar reservas, empréstimos e devoluções anteriores.  
 
-- Controle completo do catálogo de livros  
-- Gerenciamento de usuários  
-- Registro de ocorrências e geração de relatórios  
+Para **bibliotecários**, o sistema oferece:  
+- **Gestão do acervo** – cadastrar, editar e remover livros.  
+- **Controle de usuários** – monitorar atividades e gerenciar permissões.  
+- **Relatórios e ocorrências** – controle de multas, reservas e estatísticas de uso.  
 
-O sistema é acessível via **web** e **mobile**.
+**Benefícios principais:**  
+- Automatiza processos internos, reduzindo erros manuais.  
+- Facilita o acesso aos livros e ebooks.  
+- Melhora a organização e o controle da biblioteca.  
+- Integração com sistema de pagamentos para multas.  
+
+Em resumo, o BookTrack combina **funcionalidade, acessibilidade e eficiência**, tornando a gestão da biblioteca mais moderna e prática.
+
 
 ---
 
@@ -167,4 +174,5 @@ O sistema é acessível via **web** e **mobile**.
 **Descrição:** Mostra o fluxo temporal das mensagens entre os componentes para o caso de uso UC-10.  
 <a id="uc-10-sequencia-multa"></a>
 ![Sequência UC-10](ImagesPlantUML/Diagrama%20de%20Sequência%20–%20UC-10%20-%20Pagar%20Multa.png)
+
 
