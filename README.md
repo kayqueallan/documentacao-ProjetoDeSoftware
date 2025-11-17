@@ -1,144 +1,146 @@
-# 📘 BookTrack – Documentação Completa
+# 📘 BookTrack  
+Documentação de Arquitetura de Software
 
-Bem-vindo(a) à documentação oficial do **BookTrack**, sistema para gerenciamento de bibliotecas físicas e digitais.  
-Aqui você encontrará todos os diagramas UML organizados, com explicações detalhadas sobre cada componente, ator e interação.
+🚀 Bem-vindo(a) à documentação do Projeto BookTrack!  
+Este repositório concentra toda a documentação técnica de arquitetura, design e modelagem do software BookTrack. Aqui estão reunidos diversos diagramas UML e documentos visuais que explicam a estrutura, o funcionamento e as interações do sistema, oferecendo uma compreensão detalhada e organizada para desenvolvedores, analistas e demais interessados no projeto.
 
-> **Imagens:** pasta `/ImagesPlantUML/`  
+---
+
+# 📖 Sobre o Sistema
+O BookTrack é um sistema projetado para gerenciar bibliotecas físicas e digitais.  
+Ele permite que usuários realizem:
+
+- Empréstimos e reservas de livros  
+- Leitura e avaliação de ebooks  
+- Acompanhamento do histórico de leitura  
+
+Para bibliotecários, o sistema oferece:
+
+- Controle completo do catálogo de livros  
+- Gerenciamento de usuários  
+- Registro de ocorrências e geração de relatórios  
+
+O sistema é acessível via **web** e **mobile**.
+
+---
+
+# 📚 Índice
+  
+- [Diagrama de Arquitetura](#diagrama-de-arquitetura-c4--container)  
+- [Diagrama de Casos de Uso](#diagrama-de-casos-de-uso)  
+- [Diagrama de Classes](#diagrama-de-classes)  
+- [Diagramas de Comunicação](#diagramas-de-comunicacao)  
+  - [UC-05 – Realizar Reserva](#uc-05--realizar-reserva)  
+  - [UC-06 – Realizar Empréstimo](#uc-06--realizar-emprestimo)  
+  - [UC-07 – Registrar Devolução](#uc-07--registrar-devolucao)  
+  - [UC-10 – Pagar Multa](#uc-10--pagar-multa)  
+- [Diagramas de Estados](#diagramas-de-estado)  
+  - [Ciclo de Vida do Livro](#ciclo-de-vida-do-livro)  
+  - [Estado do Empréstimo](#estado-do-emprestimo)  
+  - [Estado da Multa](#estado-da-multa)  
+- [Diagrama de Implantação](#diagrama-de-implantacao)  
+- [Diagrama de Modelo de Dados](#diagrama-de-modelo-de-dados)  
+- [Diagramas de Sequência](#diagramas-de-sequencia)  
+  - [UC-05 – Realizar Reserva](#uc-05--sequencia-realizar-reserva)  
+  - [UC-06 – Realizar Empréstimo](#uc-06--sequencia-realizar-emprestimo)  
+  - [UC-07 – Registrar Devolução](#uc-07--sequencia-registrar-devolucao)  
+  - [UC-10 – Pagar Multa](#uc-10--sequencia-pagar-multa)  
 
 ---
 
 # 🏗️ Diagrama de Arquitetura (C4 / Container)
-
 **Objetivo:** Apresentar a visão de alto nível do sistema, mostrando como os contêineres principais se comunicam.  
-Ajuda a entender a arquitetura do BookTrack e o fluxo de dados entre os módulos principais.
-
-**Componentes principais:**
-- **Frontend** – Interface de usuário web e mobile.  
-- **Backend** – Processa a lógica de negócio, valida dados e integra com o banco de dados e sistemas externos.  
-- **Banco de Dados** – Armazena usuários, livros, empréstimos, reservas e multas.  
-- **Sistema de Pagamentos Externo** – Processa pagamentos de multas e taxas.
 
 **Diagrama:**  
+<a name="diagrama-de-arquitetura-c4--container"></a>
 ![Diagrama de Arquitetura](ImagesPlantUML/Diagrama%20de%20Arquitetura.png)
 
 ---
 
 # 🎯 Diagrama de Casos de Uso
-
-**Objetivo:** Mostrar os atores e as funcionalidades que eles podem executar no sistema, permitindo visualizar **quem faz o quê**.
-
-**Atores principais:**
-- **Leitor** – Reservar livros, realizar empréstimos, devolver livros e pagar multas.  
-- **Bibliotecário** – Gerenciar acervo, aprovar reservas, registrar devoluções e aplicar multas.  
-- **Sistema de Pagamentos** – Processar pagamentos de multas e taxas.
+**Objetivo:** Mostrar os atores e as funcionalidades que eles podem executar no sistema.  
 
 **Diagrama:**  
+<a name="diagrama-de-casos-de-uso"></a>
 ![Diagrama de Casos de Uso](ImagesPlantUML/Diagrama%20de%20Casos%20de%20Uso.png)
 
 ---
 
 # 🧱 Diagrama de Classes
-
-**Objetivo:** Representar a **estrutura lógica** do sistema, incluindo entidades, atributos, métodos e relacionamentos.
-
-**Principais classes:**
-- **Livro** – Título, autor, categoria e status (disponível, reservado, emprestado).  
-- **Usuário** – Nome, matrícula, tipo (leitor ou bibliotecário) e histórico de empréstimos.  
-- **Empréstimo** – Data de retirada, devolução e multas aplicadas.  
-- **Multa** – Valor, status do pagamento e data de vencimento.
+**Objetivo:** Representar a estrutura lógica do sistema, incluindo entidades, atributos, métodos e relacionamentos.  
 
 **Diagrama:**  
+<a name="diagrama-de-classes"></a>
 ![Diagrama de Classes](ImagesPlantUML/Diagrama%20de%20Classes.png)
 
 ---
 
 # 🔗 Diagramas de Comunicação
 
-**Objetivo:** Mostrar as **interações entre objetos** durante cada caso de uso, detalhando a troca de mensagens.
-
 ## UC-05 – Realizar Reserva
-**Descrição:** O leitor solicita a reserva de um livro, o sistema valida a disponibilidade e registra a reserva.  
-![UC-05 – Comunicação](ImagesPlantUML/Diagrama%20de%20Comunica%C3%A7%C3%A3o%20%E2%80%93%20UC-05%20-%20Realizar%20Reserva.png)
+**Diagrama:**  
+<a name="uc-05--realizar-reserva"></a>
+![UC-05 – Comunicação](ImagesPlantUML/Diagrama%20de%20Comunicação%20–%20UC-05%20-%20Realizar%20Reserva.png)
 
 ## UC-06 – Realizar Empréstimo
-**Descrição:** O leitor retira um livro, o sistema verifica reservas e atualiza o status do livro e do empréstimo.  
-![UC-06 – Comunicação](ImagesPlantUML/Diagrama%20de%20Comunica%C3%A7%C3%A3o%20%E2%80%93%20UC-06%20-%20Realizar%20Empr%C3%A9stimo.png)
+**Diagrama:**  
+<a name="uc-06--realizar-emprestimo"></a>
+![UC-06 – Comunicação](ImagesPlantUML/Diagrama%20de%20Comunicação%20–%20UC-06%20-%20Realizar%20Empréstimo.png)
 
 ## UC-07 – Registrar Devolução
-**Descrição:** O leitor devolve o livro, o sistema atualiza o status e calcula multas se houver atraso.  
-![UC-07 – Comunicação](ImagesPlantUML/Diagrama%20de%20Comunica%C3%A7%C3%A3o%20%E2%80%93%20UC-07%20-%20Registrar%20Devolu%C3%A7%C3%A3o.png)
+**Diagrama:**  
+<a name="uc-07--registrar-devolucao"></a>
+![UC-07 – Comunicação](ImagesPlantUML/Diagrama%20de%20Comunicação%20–%20UC-07%20-%20Registrar%20Devolução.png)
 
 ## UC-10 – Pagar Multa
-**Descrição:** O leitor efetua o pagamento da multa, o sistema confirma a transação com o sistema externo.  
-![UC-10 – Comunicação](ImagesPlantUML/Diagrama%20de%20Comunica%C3%A7%C3%A3o%20%E2%80%93%20UC-10%20-%20Pagar%20Multa.png)
+**Diagrama:**  
+<a name="uc-10--pagar-multa"></a>
+![UC-10 – Comunicação](ImagesPlantUML/Diagrama%20de%20Comunicação%20–%20UC-10%20-%20Pagar%20Multa.png)
 
 ---
 
 # ⏳ Diagramas de Estado
 
-**Objetivo:** Mostrar como os objetos mudam de estado ao longo do tempo.
+## Ciclo de Vida do Livro
+<a name="ciclo-de-vida-do-livro"></a>
+![Ciclo de Vida do Livro](ImagesPlantUML/Diagrama%20de%20Estado%20-%20Ciclo%20de%20Vida%20do%20Livro.png)
 
-- **Ciclo de Vida do Livro** – Disponível, reservado, emprestado, em manutenção.  
-  ![Ciclo de Vida do Livro](ImagesPlantUML/Diagrama%20de%20Estado%20-%20Ciclo%20de%20Vida%20do%20Livro.png)
+## Estado do Empréstimo
+<a name="estado-do-emprestimo"></a>
+![Estado do Empréstimo](ImagesPlantUML/Diagrama%20de%20Estado%20-%20Emprestimo.png)
 
-- **Estado do Empréstimo** – Pendente, ativo, concluído, atrasado.  
-  ![Estado do Empréstimo](ImagesPlantUML/Diagrama%20de%20Estado%20-%20Emprestimo.png)
-
-- **Estado da Multa** – Aberta, paga, em disputa.  
-  ![Estado da Multa](ImagesPlantUML/Diagrama%20de%20Estado%20-%20Multa.png)
+## Estado da Multa
+<a name="estado-da-multa"></a>
+![Estado da Multa](ImagesPlantUML/Diagrama%20de%20Estado%20-%20Multa.png)
 
 ---
 
 # 💽 Diagrama de Implementação
-
-**Objetivo:** Representar os nós físicos onde os componentes do sistema estão implantados (servidores, clientes e bancos de dados).  
-
-**Diagrama:**  
+<a name="diagrama-de-implantacao"></a>
 ![Diagrama de Implementação](ImagesPlantUML/Diagrama%20de%20Implementa%C3%A7%C3%A3o.png)
 
 ---
 
 # 🗃️ Modelo de Dados (DER)
-
-**Objetivo:** Exibir tabelas do banco de dados e seus relacionamentos, permitindo entender a modelagem de dados do sistema.
-
-**Diagrama:**  
+<a name="diagrama-de-modelo-de-dados"></a>
 ![Diagrama de Modelagem de Dados](ImagesPlantUML/Diagrama%20de%20Modelagem%20De%20Dados.png)
 
 ---
 
 # 🕒 Diagramas de Sequência
 
-**Objetivo:** Mostrar o fluxo temporal das mensagens entre componentes durante cada caso de uso.
-
 ## UC-05 – Realizar Reserva
-![Sequência UC-05](ImagesPlantUML/Diagrama%20de%20Sequ%C3%AAncia%20%E2%80%93%20UC-05%20-%20Realizar%20Reserva.png)
+<a name="uc-05--sequencia-realizar-reserva"></a>
+![Sequência UC-05](ImagesPlantUML/Diagrama%20de%20Sequência%20–%20UC-05%20-%20Realizar%20Reserva.png)
 
 ## UC-06 – Realizar Empréstimo
-![Sequência UC-06](ImagesPlantUML/Diagrama%20de%20Sequ%C3%AAncia%20%E2%80%93%20UC-06%20-%20Realizar%20Empr%C3%A9stimo.png)
+<a name="uc-06--sequencia-realizar-emprestimo"></a>
+![Sequência UC-06](ImagesPlantUML/Diagrama%20de%20Sequência%20–%20UC-06%20-%20Realizar%20Empréstimo.png)
 
 ## UC-07 – Registrar Devolução
-![Sequência UC-07](ImagesPlantUML/Diagrama%20de%20Sequ%C3%AAncia%20%E2%80%93%20UC-07%20-%20Registrar%20Devolu%C3%A7%C3%A3o.png)
+<a name="uc-07--sequencia-registrar-devolucao"></a>
+![Sequência UC-07](ImagesPlantUML/Diagrama%20de%20Sequência%20–%20UC-07%20-%20Registrar%20Devolução.png)
 
 ## UC-10 – Pagar Multa
-![Sequência UC-10](ImagesPlantUML/Diagrama%20de%20Sequ%C3%AAncia%20%E2%80%93%20UC-10%20-%20Pagar%20Multa.png)
-
----
-
-# 📌 Observações e Dicas
-
-- A pasta `ImagesPlantUML` deve estar no **mesmo nível** do arquivo `README.md`.  
-- Os nomes das imagens foram codificados com `%20` e UTF-8, mas podem ser renomeados para simplificar.  
-- Esta documentação é útil para desenvolvedores, testadores e stakeholders.  
-
----
-
-# 📞 Suporte
-
-Posso gerar:  
-
-- ✔ PDF da documentação completa  
-- ✔ README estilizado com sumário automático  
-- ✔ README com badges profissionais  
-- ✔ Versão com nomes de imagens sem espaços e acentos  
-- ✔ Organização completa do repositório
+<a name="uc-10--sequencia-pagar-multa"></a>
+![Sequência UC-10](ImagesPlantUML/Diagrama%20de%20Sequência%20–%20UC-10%20-%20Pagar%20Multa.png)
