@@ -1,6 +1,4 @@
-# 📘 BookTrack  
-Documentação de Arquitetura de Software
-
+# 📘 BookTrack 
 🚀 Bem-vindo(a) à documentação do Projeto BookTrack!  
 Este repositório concentra toda a documentação técnica de arquitetura, design e modelagem do software BookTrack. Aqui estão reunidos diversos diagramas UML e documentos visuais que explicam a estrutura, o funcionamento e as interações do sistema, oferecendo uma compreensão detalhada e organizada para desenvolvedores, analistas e demais interessados no projeto.
 
@@ -174,5 +172,6 @@ Em resumo, o BookTrack combina **funcionalidade, acessibilidade e eficiência**,
 **Descrição:** Mostra o fluxo temporal das mensagens entre os componentes para o caso de uso UC-10.  
 <a id="uc-10-sequencia-multa"></a>
 ![Sequência UC-10](ImagesPlantUML/Diagrama%20de%20Sequência%20–%20UC-10%20-%20Pagar%20Multa.png)
+
 
 
