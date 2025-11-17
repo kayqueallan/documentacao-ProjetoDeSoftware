@@ -134,12 +134,14 @@ O sistema é acessível via **web** e **mobile**.
 
 <h2 id="diagrama-implantacao">💽 Diagrama de Implantação</h2>
 **Descrição:** Representa os nós físicos onde os componentes do sistema estão implantados.  
+
 ![Diagrama de Implementação](ImagesPlantUML/Diagrama%20de%20Implementa%C3%A7%C3%A3o.png)
 
 ---
 
 <h2 id="diagrama-modelo-dados">🗃️ Modelo de Dados (DER)</h2>
 **Descrição:** Exibe tabelas do banco de dados e seus relacionamentos, permitindo entender a modelagem de dados do sistema.  
+
 ![Diagrama de Modelagem de Dados](ImagesPlantUML/Diagrama%20de%20Modelagem%20De%20Dados.png)
 
 ---
@@ -165,3 +167,4 @@ O sistema é acessível via **web** e **mobile**.
 **Descrição:** Mostra o fluxo temporal das mensagens entre os componentes para o caso de uso UC-10.  
 <a id="uc-10-sequencia-multa"></a>
 ![Sequência UC-10](ImagesPlantUML/Diagrama%20de%20Sequência%20–%20UC-10%20-%20Pagar%20Multa.png)
+
