@@ -33,7 +33,8 @@ Em resumo, o BookTrack combina **funcionalidade, acessibilidade e eficiência**,
   
 - [Diagrama de Arquitetura](#diagrama-arquitetura)  
 - [Diagrama de Casos de Uso](#diagrama-casos-de-uso)  
-- [Diagrama de Classes](#diagrama-classes)  
+- [Diagrama de Classes](#diagrama-classes)
+- [Diagrama de Componentes](#diagrama-componentes)
 - [Diagramas de Comunicação](#diagramas-comunicacao)  
   - [UC-05 – Realizar Reserva](#uc-05-reserva)  
   - [UC-06 – Realizar Empréstimo](#uc-06-emprestimo)  
@@ -91,6 +92,21 @@ Em resumo, o BookTrack combina **funcionalidade, acessibilidade e eficiência**,
 
 **Diagrama:**  
 ![Diagrama de Classes](ImagesPlantUML/Diagrama%20de%20Classes.png)
+
+---
+
+<h2 id="diagrama-componentes">🧩 Diagrama de Componentes</h2>
+**Objetivo:** Exibir a organização dos principais módulos do sistema e como eles se comunicam — incluindo frontend, backend, serviços, banco de dados e integrações externas.**
+
+**Componentes principais:**
+- **Frontend Web/Mobile**  
+- **API Gateway (REST/HTTP)**  
+- **Serviços (Usuários, Livros, Empréstimos/Reservas, Multas)**  
+- **Banco de Dados PostgreSQL**  
+- **Sistema de Pagamentos Externo**
+
+**Diagrama:**  
+![Diagrama de Componentes](ImagesPlantUML/Diagrama%20de%20Componentes.png)
 
 ---
 
@@ -172,6 +188,7 @@ Em resumo, o BookTrack combina **funcionalidade, acessibilidade e eficiência**,
 **Descrição:** Mostra o fluxo temporal das mensagens entre os componentes para o caso de uso UC-10.  
 <a id="uc-10-sequencia-multa"></a>
 ![Sequência UC-10](ImagesPlantUML/Diagrama%20de%20Sequência%20–%20UC-10%20-%20Pagar%20Multa.png)
+
 
 
 
